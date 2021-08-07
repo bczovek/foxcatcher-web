@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/282/fox_1f98a.png">
+    <title>Foxcatcher</title>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="name">
+            <h1>Enter your name</h1>
+            <input id="nameInput" placeholder="Enter your name">
+            <button class="btn btn-outline-light" onclick="setName()" id="setName">Enter name</button><br>
+            <span id="name">Please enter a name first!</span>
+        </div>
+        <div class="create">
+            <h1>Create a game</h1>
+            <div>
+                <input type="radio" id="fox" name="side" value="FOX" checked>
+                <label for="fox">Fox</label>
+                <input type="radio" id="dogs" name="side" value="DOGS">
+                <label for="dogs">Dogs</label><br>
+            </div>
+            <button class="btn btn-outline-light" onclick="createGame()" disabled id="createButton">Start a new game</button>
+        </div>
+        <div class="join">
+            <h1>Join a game</h1>
+            <input id="gameIdInput" placeholder="Enter Game ID">
+            <button class="btn btn-outline-light" onclick="connectToGame()" disabled id="joinButton">Join game</button><br>
+            <span id="error"></span>
+        </div>
+    </div>
+    <div class="game">
+        <div class="player">
+            <span id="player1Winner"></span>
+            <h2 id="player1"></h2><br>
+            <h3 id="player1Side"></h3>
+        </div>
+        <div class="chessboard">
+            <div class = "gameInfo">
+                <span id="gameId"></span>
+                <span id="gameStatus"></span>
+                <button class="btn btn-outline-light" id="resetButton" onclick="reset()">Leave</button>
+            </div>
+            <table>
+                <tr>
+                    <td id="0-0"></td>
+                    <td id="0-1"></td>
+                    <td id="0-2"></td>
+                    <td id="0-3"></td>
+                    <td id="0-4"></td>
+                    <td id="0-5"></td>
+                    <td id="0-6"></td>
+                    <td id="0-7"></td>
+                </tr>
+                <tr>
+                    <td id="1-0"></td>
+                    <td id="1-1"></td>
+                    <td id="1-2"></td>
+                    <td id="1-3"></td>
+                    <td id="1-4"></td>
+                    <td id="1-5"></td>
+                    <td id="1-6"></td>
+                    <td id="1-7"></td>
+                </tr>
+                <tr>
+                    <td id="2-0"></td>
+                    <td id="2-1"></td>
+                    <td id="2-2"></td>
+                    <td id="2-3"></td>
+                    <td id="2-4"></td>
+                    <td id="2-5"></td>
+                    <td id="2-6"></td>
+                    <td id="2-7"></td>
+                </tr>
+                <tr>
+                    <td id="3-0"></td>
+                    <td id="3-1"></td>
+                    <td id="3-2"></td>
+                    <td id="3-3"></td>
+                    <td id="3-4"></td>
+                    <td id="3-5"></td>
+                    <td id="3-6"></td>
+                    <td id="3-7"></td>
+                </tr>
+                <tr>
+                    <td id="4-0"></td>
+                    <td id="4-1"></td>
+                    <td id="4-2"></td>
+                    <td id="4-3"></td>
+                    <td id="4-4"></td>
+                    <td id="4-5"></td>
+                    <td id="4-6"></td>
+                    <td id="4-7"></td>
+                </tr>
+                <tr>
+                    <td id="5-0"></td>
+                    <td id="5-1"></td>
+                    <td id="5-2"></td>
+                    <td id="5-3"></td>
+                    <td id="5-4"></td>
+                    <td id="5-5"></td>
+                    <td id="5-6"></td>
+                    <td id="5-7"></td>
+                </tr>
+                <tr>
+                    <td id="6-0"></td>
+                    <td id="6-1"></td>
+                    <td id="6-2"></td>
+                    <td id="6-3"></td>
+                    <td id="6-4"></td>
+                    <td id="6-5"></td>
+                    <td id="6-6"></td>
+                    <td id="6-7"></td>
+                </tr>
+                <tr>
+                    <td id="7-0"></td>
+                    <td id="7-1"></td>
+                    <td id="7-2"></td>
+                    <td id="7-3"></td>
+                    <td id="7-4"></td>
+                    <td id="7-5"></td>
+                    <td id="7-6"></td>
+                    <td id="7-7"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="player">
+            <span id="player2Winner"></span>
+            <h2 id="player2"></h2><br>
+            <h3 id="player2Side"></h3>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+    <script src="js/socket.js"></script>
+</body>
+</html>

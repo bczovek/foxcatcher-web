@@ -1,0 +1,86 @@
+body {
+    padding: 20px;
+    background: #496abf;
+    color: white;
+}
+
+table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    background: cornflowerblue;
+    border: 10px solid white;
+}
+td {
+    width: 60px; height: 60px;
+}
+
+tr:nth-child(odd) td:nth-child(even), tr:nth-child(even) td:nth-child(odd) {
+    background: azure;
+}
+
+.dashboard{
+    display: flex;
+    justify-content: space-around;
+    height: 100px;
+    align-items: center;
+    margin-bottom: 75px;
+
+}
+.name{
+    float: left;
+    padding: 0 10px 10px 10px;
+    border: 3px solid white;
+    border-radius: 10px;
+
+}
+.create{
+    float: left;
+    padding: 0 10px 10px 10px;
+    border: 3px solid white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.create div{
+    margin: auto;
+}
+.join{
+    padding: 0 10px 10px 10px;
+    border: 3px solid white;
+    border-radius: 10px;
+}
+.game{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+img {
+    display: block;
+    margin: auto;
+}
+h1{
+    text-align: center;
+}
+.player{
+    width: 10%;
+}
+#player1Winner #player2Winner{
+    margin-left: auto;
+    margin-right: auto;
+}
+.player h2{
+    text-align: center;
+}
+#resetButton{
+    display: none;
+}
+.gameInfo{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    align-items: center;
+}
+#error{
+    font-weight: bold;
+    color: red;
+}
