@@ -1,4 +1,4 @@
-const url = 'http://localhost:8080';
+const url = 'https://foxcatcher.herokuapp.com';
 const foxImg = "<img src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/282/fox_1f98a.png' width='50' height='50'>";
 const dogImg = "<img src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/282/dog-face_1f436.png' width='50' height='50'>";
 const crownImg = "<img src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/282/crown_1f451.png' width='50' height='50'>"
@@ -109,7 +109,6 @@ function connectToGame() {
                 document.getElementById("player2").innerHTML = data.player2.name;
                 document.getElementById("player2Side").innerHTML = data.player2.side === "FOX" ? foxImg : dogImg;
                 connectToSocket(gameId);
-                alert("Connected");
             },
             error: function (error) {
                 document.getElementById("error").innerHTML = "Couldn't join game";

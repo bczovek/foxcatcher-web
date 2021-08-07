@@ -112,6 +112,7 @@ public class GameService {
         if (getValidFoxMoves(game.getFoxPosition(), game.getDogsPosition()).isEmpty()) {
             game.setWinner(game.getPlayer1().getSide().equals(Side.DOGS) ? game.getPlayer1() : game.getPlayer2());
             game.setStatus(GameStatus.FINISHED);
+            GameStorage.getInstance().deleteGame(game.getGameId());
         }
         int lastDogRow = game.getDogsPosition().stream()
                 .map(Position::getRow)
@@ -120,6 +121,7 @@ public class GameService {
         if (game.getFoxPosition().getRow() >= lastDogRow) {
             game.setWinner(game.getPlayer1().getSide().equals(Side.FOX) ? game.getPlayer1() : game.getPlayer2());
             game.setStatus(GameStatus.FINISHED);
+            GameStorage.getInstance().deleteGame(game.getGameId());
         }
     }
 
@@ -148,7 +150,7 @@ public class GameService {
             game.setStatus(GameStatus.FINISHED);
         }
 
-        GameStorage.getInstance().setGame(game);
+        GameStorage.getInstance().deleteGame(gameId);
 
         return game;
     }
